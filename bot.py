@@ -36,6 +36,6 @@ async def load():
 
 async def bot():
     await load()
-    await client.start('MTA2MzEyMTkxMTE4NzUyNTc2Mg.G01aPf.ke3u0OQxn293Cb5KTQ6-Tabpy9nwJO5CWA9jH0')
+    await client.start('MTA3MTgwNTY4MTgyNjU0OTgwMQ.GI2pPe.yHpmlbXebfSmUN7WEJOFT4jt3eKUskgd1gtLuM')
     
 asyncio.run(bot())
