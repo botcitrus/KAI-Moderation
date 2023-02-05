@@ -58,6 +58,28 @@ class Select(discord.ui.Select):
             elif self.values[0] == "Designer":
                 await interaction.response.send_modal(DesModal())
                 await interaction.response.send_message("Заполните заявку!", ephemeral = True)
+                
+class ReportModal(discord.ui.Modal, title = "Отправка жалобы:"):
+    appicant = discord.ui.TextInput(label = "Ваше имя и id discord:", min_length = 20, max_length = 50, placeholder = "Fudge (feat PeteSHOK), 975790592623800361")
+    intruder = discord.ui.TextInput(label = "Имя и id discord нарушителя:", min_length = 20, max_length = 50, placeholder = "Fudge (feat PeteSHOK), 975790592623800361")
+    violation = discord.ui.TextInput(label = "Нарушение (в правилах):", placeholder = "2.1")
+    active = discord.ui.TextInput(label = "Полностью рассказать о нарушении:", placeholder = "5-6 часов в день", style = discord.TextStyle.paragraph)
+    FA2 = discord.ui.TextInput(label = "2FA:", placeholder = "есть/нет")
+    async def on_submit(self, interaction: discord.Interaction):
+        guild = interaction.guild
+        channel = guild.get_channel(1060262034496815176)
+        embed = discord.Embed(title = "Новая жалоба:", description = f"Пользователь: {self.}\nНарушитель: {self.appicant}\nНарушение: {self.violation}\nПодробная информация о нарушении: {self.active}")
+        await interaction.response.send_message("Заявка получена и будет рассмотрена в ближайщее время!", ephemeral = True)
+        await channel.send(embed = embed)
+                
+class ReportButton(discord.ui.View):
+    def __init__(self, *, timeout = None):
+        super().__init__(timeout = timeout)
+        
+    @discord.ui.button(label="Отпраить жалобу!", style = discord.ButtonStyle.gray)
+    async def reportb(self, button: discord.ui.Button, interaction: discord.Interaction):
+        await interaction.send_modal(ReportModal())
+        await interaction.send_message(content = "This is an edited button response!")
 
 class SelectView(discord.ui.View):
     def __init__(self, *, timeout = None):
@@ -71,7 +93,7 @@ class Report(commands.Cog):
     @commands.command()
     async def report(self, ctx):
         embed = discord.Embed(title = f"Отправить жалобу:", description = f"Чтобы отправить жалобу нажмите ниже на кнопку и заполните анкету!")
-        await ctx.send(embed = embed, view = SelectView())
+        await ctx.send(embed = embed, view = ReportButton())
       
 async def setup(client):
     await client.add_cog(Report(client))
