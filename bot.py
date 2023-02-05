@@ -19,7 +19,7 @@ import os
 
 intents = discord.Intents.all()
 intents.message_content = True
-client = commands.Bot(command_prefix = "=", intents = intents)
+client = commands.Bot(command_prefix = "!", intents = intents)
 
 @client.event
 async def on_ready():
@@ -27,7 +27,7 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print("--------")
-    await client.change_presence(activity=discord.Streaming(name=f'Букмекерская компания', url="https://www.twitch.tv/qrushcsgo"))
+    await client.change_presence(activity=discord.Streaming(name=f'Бот дял модерации вашего сервера!', url="https://www.twitch.tv/qrushcsgo"))
     
 async def load():
     for file in os.listdir("./cogs"):
