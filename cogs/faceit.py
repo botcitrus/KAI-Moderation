@@ -26,7 +26,7 @@ null_color=discord.Color.from_rgb(47,49,56)
 class Faceit(commands.Cog):
     def __init__(self, client):
         self.client = client
-        self.cluster = MongoClient("mongodb+srv://Setroom:CFLrxCSX0fzBIMlA@cluster0.l9fw9.mongodb.net/ecodb?retryWrites=true&w=majority")
+        self.cluster = MongoClient("mongodb+srv://@cluster0.l9fw9.mongodb.net/?retryWrites=true&w=majority")
         self.colluser = self.cluster.faceit.user
         self.collgame = self.cluster.faceit.game
 	
